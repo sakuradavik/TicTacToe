@@ -17,25 +17,22 @@ Player::Player(string const name,char gamePiece): name(name){
 string Player:: getName(){
     return this->name;
 }
-//void makeMove(Grid * g);
-void Player::win(){
-    this->wins++;
+char Player:: getGamePiece(){
+    return this->gamePiece;
 }
-int Player::getWins(){
-    return this->wins;
+
+bool Player::makeMove(Grid * grid, int i, int j){
+    if(i < 0 || i > 3 || j < 0 || j > 3){
+        cout<<"Not a valid move"<<endl;
+        return false;
+    }
+    else if(grid->getGridElemenet()[i][j] != ' '){
+        cout<<"Piece already exists at this point"<<endl;
+        return false;
+    }
+    else{
+    (grid->getGridElemenet()[i][j] = this->gamePiece);
+        return true;
+    }
 }
-void Player::lose(){
-    this->loses++;
-}
-int Player::getLoses(){
-    return this->loses;
-}
-void Player::forfeit(){
-    this->forfeits++;
-}
-int Player::getForfeits(){
-    return this->forfeits;
-}
-double Player::getAverage(){
-    return ((double)wins/(double)(wins+loses+forfeits));
-}
+
